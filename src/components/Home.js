@@ -10,8 +10,6 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div>Debug: Home is rendering.</div>
-
       {location.pathname === "/" ? <Overview /> : <Outlet />}
       <BottomBar />
     </>

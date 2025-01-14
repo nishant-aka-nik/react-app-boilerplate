@@ -1,27 +1,30 @@
-import React from "react";
-import { useGoogleLogin } from "@react-oauth/google"; 
+import React, { useContext } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
+import { ProfileContext } from "../contexts/ProfileContext";  // Import the context
+
 
 function GoogleLoginComponent() {
   const navigate = useNavigate();
+  const { setProfile } = useContext(ProfileContext);  // Access setProfile
+
 
   const login = useGoogleLogin({
     scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
     onSuccess: async (tokenResponse) => {
       try {
-        console.log("🚀 ~ login success ~ tokenResponse:", tokenResponse);
-        
         // Extract and store the access token
         const { access_token } = tokenResponse;
-        console.log("🚀 ~ onSuccess: ~ access_token:", access_token);
         localStorage.setItem("google_token", access_token);
 
         // Use access token to fetch user profile details
         const profile = await fetchUserProfile(access_token);
-        console.log("🚀 ~ User Profile:", profile);         
 
         // Optionally store profile details
         localStorage.setItem("user_profile", JSON.stringify(profile));
+
+        // Update profile in context
+        setProfile(profile);
 
         navigate("/");  // Redirect after successful login  
       } catch (error) {
@@ -36,8 +39,20 @@ function GoogleLoginComponent() {
   });
 
   return (
-    <div className="login-container">
-      <button onClick={() => login()}>Sign in with Google</button>
+    <div className="full-screen-parent">
+      <div className="login-container">
+        <h2>Welcome to Plutus</h2>
+        <p>Your Budget Helper</p>
+        <button
+          onClick={() => login()}
+          className="login-button"
+        >
+          <i className="fab fa-google" /> Log in with Google
+        </button>
+        <div className="footer">
+          &copy; 2025 Plutus. All rights reserved.
+        </div>
+      </div>
     </div>
   );
 }

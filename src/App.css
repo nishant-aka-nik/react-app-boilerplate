@@ -104,10 +104,49 @@ body, html {
   border: 2px solid #000;
 }
 
-.login-container {
+/* ------------------------------------------Login page CSS------------------------------------------------------------------ */
+/* Parent container takes full screen and centers its content */
+.full-screen-parent {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
   height: 100vh;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Or your desired background */
+  margin: 0;
+  padding: 0;
 }
+
+/* Child container styling */
+.login-container {
+  background: #ffffff;
+  padding: 40px;
+  border: 2px solid #000;    /* Adds a visible border */
+  border-radius: 10px;       /* Rounds the corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-button {
+  background-color: #4285F4;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-button:hover {
+  background-color: #357ae8;
+}
+.login-button i {
+  margin-right: 8px;
+}
+/* ------------------------------------------Login page CSS------------------------------------------------------------------ */
