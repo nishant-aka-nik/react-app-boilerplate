@@ -1,0 +1,113 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.contacts,
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid blueviolet;
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+}
+
+.contact-list-item {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.search-input {
+  width: 100%;
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid blueviolet;
+  outline: none;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  font-size: 1rem;
+  height: 4rem;
+}
+
+.navbar a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.bottom-bar {
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  background-color: #333;
+  padding: 5px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 4rem;
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+.bottom-bar a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.bottom-bar a:hover {
+  color: #000;
+}
+
+.bottom-bar .active {
+  border: 2px solid #fff;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.bottom-bar .active:hover {
+  border: 2px solid #000;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
