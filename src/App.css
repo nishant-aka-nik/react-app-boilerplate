@@ -129,6 +129,20 @@ body, html {
   width: 100%;
 }
 
+.login-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+.login-input:focus {
+  outline: none;
+  border-color: #4285F4;
+}
 .login-button {
   background-color: #4285F4;
   color: #ffffff;
@@ -139,14 +153,9 @@ body, html {
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 10px;
 }
 .login-button:hover {
   background-color: #357ae8;
-}
-.login-button i {
-  margin-right: 8px;
 }
 /* ------------------------------------------Login page CSS------------------------------------------------------------------ */

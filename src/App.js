@@ -3,13 +3,15 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/joy/styles";
 import theme from "./theme";
-import Contacts from "./components/Contacts";
 import Search from "./components/Search";
 import Home from "./components/Home";
 import MyProfile from "./components/MyProfile";
 import GoogleLoginComponent from "./components/GoogleLogin"; // Import GoogleLogin component
 import ProtectedRoute from "./components/ProtectedRoute"; // Import ProtectedRoute component
-import Overview from "./components/Overview";
+import HomePage from "./components/HomePage"; // Import HomePage component
+import ObjectDetails from "./components/ObjectDetails"; // Import ObjectDetails component
+import Services from "./components/Services"; // Import Services component
+import DiffViewer from "./components/DiffViewer"; // Import DiffViewer component
 import { ProfileProvider } from "./contexts/ProfileContext"; // Import ProfileProvider
 
 import "./App.css";
@@ -31,11 +33,11 @@ function App() {
             }
           >
             {/* Nested routes inside Home */}
-            <Route index element={<Overview />} />  {/* Render Overview at exact "/" */}
+            <Route index element={<HomePage />} />  {/* Render HomePage at exact "/" */}
             <Route
-              path="contacts"
+              path="objects/:objectType"
               element={
-                <Contacts />
+                <ObjectDetails />
               }
             />
             <Route
@@ -48,6 +50,18 @@ function App() {
               path="myprofile"
               element={
                 <MyProfile />
+              }
+            />
+            <Route
+              path="services/:uid"
+              element={
+                <Services />
+              }
+            />
+            <Route
+              path="diff-viewer"
+              element={
+                <DiffViewer />
               }
             />
             {/* Add additional nested routes as needed */}

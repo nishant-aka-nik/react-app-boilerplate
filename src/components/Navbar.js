@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const { profile } = useContext(ProfileContext);
   console.log("🚀 ~ Navbar ~ profile:", profile)
-  const imageUrl = profile?.photos?.[0]?.url || "https://via.placeholder.com/100";
+  const imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQOf0rYYMvVqiD6XW7crOU4qcPO9QijJigqA&s";
   console.log("🚀 ~ Navbar ~ imageUrl:", imageUrl)
 
 

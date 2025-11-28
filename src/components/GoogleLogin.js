@@ -1,56 +1,68 @@
-import React, { useContext } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../contexts/ProfileContext";  // Import the context
 
+// Hardcoded credentials
+const VALID_USERNAME = "admin";
+const VALID_PASSWORD = "BeF5.123";
 
 function GoogleLoginComponent() {
   const navigate = useNavigate();
   const { setProfile } = useContext(ProfileContext);  // Access setProfile
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    
+    if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+      // Create a mock profile for the admin user
+      const profile = {
+        names: [{ displayName: "Admin User" }],
+        emailAddresses: [{ value: "admin@f5.com" }],
+        photos: [{ url: "https://via.placeholder.com/100" }]
+      };
 
-  const login = useGoogleLogin({
-    scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
-    onSuccess: async (tokenResponse) => {
-      try {
-        // Extract and store the access token
-        const { access_token } = tokenResponse;
-        localStorage.setItem("google_token", access_token);
+      // Store login token
+      localStorage.setItem("google_token", "admin_authenticated");
+      localStorage.setItem("user_profile", JSON.stringify(profile));
 
-        // Use access token to fetch user profile details
-        const profile = await fetchUserProfile(access_token);
+      // Update profile in context
+      setProfile(profile);
 
-        // Optionally store profile details
-        localStorage.setItem("user_profile", JSON.stringify(profile));
-
-        // Update profile in context
-        setProfile(profile);
-
-        navigate("/");  // Redirect after successful login  
-      } catch (error) {
-        console.error("Error handling access token:", error);
-        alert("An unexpected error occurred while processing your login. Please try again.");
-      }
-    },
-    onError: (error) => {
-      console.log("Login failed:", error);
-      alert("Login failed! Please try again.");
-    },
-  });
+      navigate("/");  // Redirect after successful login
+    } else {
+      alert("Invalid username or password!");
+    }
+  };
 
   return (
     <div className="full-screen-parent">
       <div className="login-container">
-        <h2>Welcome to Plutus</h2>
-        <p>Your Budget Helper</p>
-        <button
-          onClick={() => login()}
-          className="login-button"
-        >
-          <i className="fab fa-google" /> Log in with Google
-        </button>
+        <h2>Welcome to Data Reconcile</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="login-input"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="login-input"
+            required
+          />
+          <button type="submit" className="login-button">
+            Log in
+          </button>
+        </form>
         <div className="footer">
-          &copy; 2025 Plutus. All rights reserved.
+          &copy; 2025 F5. All rights reserved.
         </div>
       </div>
     </div>
@@ -58,23 +70,3 @@ function GoogleLoginComponent() {
 }
 
 export default GoogleLoginComponent;
-
-
-
-async function fetchUserProfile(accessToken) {
-  const response = await fetch(
-    "https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos",
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch user profile");
-  }
-
-  const profileData = await response.json();
-  return profileData;
-}
