@@ -46,7 +46,7 @@ const HomePage = () => {
   return (
     <Box component="section" sx={{ padding: 2 }}>
       <Typography level="h2" sx={{ mb: 2 }}>
-        Object Types Dashboard
+        Eywa Dashboard
       </Typography>
 
       {/* Overall Dashboard Card */}
@@ -186,7 +186,7 @@ const HomePage = () => {
       </Card>
 
       <Typography level="h3" sx={{ mb: 2 }}>
-        Browse by Type
+        Objects in DB
       </Typography>
       <Grid container spacing={2}>
         {objectTypes.map((objectType, index) => {
